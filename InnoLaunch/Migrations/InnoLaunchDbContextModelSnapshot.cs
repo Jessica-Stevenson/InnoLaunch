@@ -22,6 +22,23 @@ namespace InnoLaunch.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("InnoLaunch.Models.Founder", b =>
+                {
+                    b.Property<int>("FounderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FounderId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FounderId");
+
+                    b.ToTable("Founders");
+                });
+
             modelBuilder.Entity("InnoLaunch.Models.Startup", b =>
                 {
                     b.Property<int>("Id")
@@ -34,6 +51,9 @@ namespace InnoLaunch.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FounderId")
                         .HasColumnType("int");
 
                     b.Property<string>("HeadquartersLocation")
@@ -50,7 +70,20 @@ namespace InnoLaunch.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FounderId");
+
                     b.ToTable("Startups");
+                });
+
+            modelBuilder.Entity("InnoLaunch.Models.Startup", b =>
+                {
+                    b.HasOne("InnoLaunch.Models.Founder", "Founder")
+                        .WithMany()
+                        .HasForeignKey("FounderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Founder");
                 });
 #pragma warning restore 612, 618
         }

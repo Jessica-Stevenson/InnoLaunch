@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace InnoLaunch.Models
 {
@@ -12,7 +13,7 @@ namespace InnoLaunch.Models
         [Required(ErrorMessage = "Startup industry is required")]
         public string Industry { get; set; }
 
-        [Required(ErrorMessage = "Startup HeadquartersLocation is required")]
+        [Required(ErrorMessage = "Startup Headquarters Location is required")]
         public string HeadquartersLocation { get; set; }
 
         [Required(ErrorMessage = "Startup Date Founded is required")]
@@ -20,6 +21,11 @@ namespace InnoLaunch.Models
 
         [Required(ErrorMessage = "Startup Employee Count is required")]
         public int EmployeeCount { get; set; }
+
+        public int FounderId { get; set; }
+
+        [ValidateNever]
+        public Founder Founder { get; set; }
 
     }
 }

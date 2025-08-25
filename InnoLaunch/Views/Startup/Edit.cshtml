@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Startup
+
+<h2>Edit Startup</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control mb-3" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <label asp-for="Industry"></label>
+        <input asp-for="Industry" class="form-control mb-3" />
+        <span asp-validation-for="Industry" class="text-danger"></span>
+
+        <label asp-for="HeadquartersLocation"></label>
+        <input asp-for="HeadquartersLocation" class="form-control mb-3" />
+        <span asp-validation-for="HeadquartersLocation" class="text-danger"></span>
+
+        <label asp-for="DateFounded"></label>
+        <input asp-for="DateFounded" class="form-control mb-3" />
+        <span asp-validation-for="DateFounded" class="text-danger"></span>
+
+        <label asp-for="EmployeeCount"></label>
+        <input asp-for="EmployeeCount" class="form-control mb-3" />
+        <span asp-validation-for="EmployeeCount" class="text-danger"></span>
+
+        <label asp-for="FounderId"></label>
+        <select asp-for="FounderId" class="form-control mb-3" asp-items="ViewBag.Founders">
+            <option value="">Select Founder</option>
+        </select>
+        <span asp-validation-for="FounderId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

@@ -1,3 +1,4 @@
+using InnoLaunch.Data;
 using InnoLaunch.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,5 +31,12 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<InnoLaunchDbContext>();
+    SeedData.Initialize(context);
+}
 
 app.Run();

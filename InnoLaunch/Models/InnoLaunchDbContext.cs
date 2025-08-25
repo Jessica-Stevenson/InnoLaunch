@@ -9,5 +9,6 @@ namespace InnoLaunch.Models
 
 
         public DbSet<Startup> Startups { get; set; }
+        public DbSet<Founder> Founders { get; set; }  
     }
  }

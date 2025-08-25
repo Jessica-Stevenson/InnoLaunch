@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<InnoLaunch.Models.Startup>
+
+@{
+    ViewData["Title"] = "Startups";
+}
+
+<h2 class="mb-4">Startup List</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Industry</th>
+            <th>Headquarters Location</th>
+            <th>Date Founded</th>
+            <th>Employee Count</th>
+            <th>Founder</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var startup in Model)
+        {
+            <tr>
+                <td>@startup.Id</td>
+                <td>@startup.Name</td>
+                <td>@startup.Industry</td>
+                <td>@startup.HeadquartersLocation</td>
+                <td>@startup.DateFounded.ToShortDateString()</td>
+                <td>@startup.EmployeeCount</td>
+                <td>@startup.Founder?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@startup.Id" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@startup.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@startup.Id"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this startup?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Add New Startup</a>
